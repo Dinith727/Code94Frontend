@@ -104,6 +104,11 @@ const ProductsListPage = ({ history, match }) => {
         <Col>
          <input style={{ borderRadius: '30px'}} className='form-control' type='search' placeholder='Search' name='searchPlant' onChange={handleFilter}></input>
         </Col>
+        <Col>
+         <Button style={{backgroundColor: '#001EB9', borderRadius: '30px'}} >
+         <i className='fas fa-search fa-xl'></i> Search
+          </Button>
+        </Col>
         <Col className='text-right'>
           <Button style={{backgroundColor: '#001EB9', borderRadius: '10px'}} className='my-3 mr-3' onClick={createProductHandler}>
            New Product
