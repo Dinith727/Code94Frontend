@@ -100,12 +100,19 @@ const ProductsListPage = ({ history, match }) => {
         <Col>
           <h1>Products</h1>
         </Col>
+       
+      </Row>
+      <Row className='align-items-center'>
+      
         <Col>
-         <input className='form-control' type='search' placeholder='Search' name='searchPlant' onChange={handleFilter}></input>
+         <input style={{ borderRadius: '30px'}} className='form-control' type='search' placeholder='Search' name='searchPlant' onChange={handleFilter}></input>
         </Col>
         <Col className='text-right'>
-          <Button className='my-3' onClick={createProductHandler}>
-            <i className='fas fa-plus'></i> Create Product
+          <Button style={{backgroundColor: '#001EB9', borderRadius: '10px'}} className='my-3 mr-3' onClick={createProductHandler}>
+           New Product
+          </Button>
+          <Button style={{backgroundColor: '#FFFFFF', color: '#001EB9', borderRadius: '10px'}} className='my-3' onClick={createProductHandler}>
+            <i className='fas fa-star'></i>
           </Button>
         </Col>
       </Row>
