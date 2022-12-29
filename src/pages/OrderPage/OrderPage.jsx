@@ -22,7 +22,7 @@ const OrderPage = ({ history, match }) => {
   const { order, loading, error } = orderDetails;
 
   const orderPay = useSelector((state) => state.orderPay);
-  const { success: successPay, loading: loadingPay } = orderPay;
+  const { success: successPay} = orderPay;
 
   const orderDeliver = useSelector((state) => state.orderDeliver);
   const { success: successDeliver, loading: loadingDeliver } = orderDeliver;
@@ -49,7 +49,7 @@ const OrderPage = ({ history, match }) => {
       history.push('/login');
     }
     const addPaypalScript = async () => {
-      const { data: clientId } = await axios.get('/api/config/paypal');
+      const { data: clientId } = await axios.get('https://plantae-backend.herokuapp.com/api/config/paypal');
       const script = document.createElement('script');
       script.type = 'text/javascript';
       script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
@@ -193,19 +193,16 @@ const OrderPage = ({ history, match }) => {
                   <Col>${order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
-              {!order.isPaid && (
+              
                 <ListGroup.Item>
-                  {loadingPay && <Loader />}
-                  {!sdkReady ? (
-                    <Loader />
-                  ) : (
+                 
                     <PayPalButton
                       amount={order.totalPrice}
                       onSuccess={successPaymentHandler}
                     />
-                  )}
+               
                 </ListGroup.Item>
-              )}
+           
               {loadingDeliver && <Loader />}
               {userInfo && order.isPaid && !order.isDelivered && (
                 <ListGroup.Item>

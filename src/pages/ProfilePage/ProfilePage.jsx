@@ -10,6 +10,7 @@ import {
 } from '../../redux/reducers/user/user.actions';
 import UserActionTypes from '../../redux/reducers/user/user.types';
 import { listMyOrders } from '../../redux/reducers/order/order.actions';
+import { listProducts } from '../../redux/reducers/product/product.actions';
 
 const ProfilePage = ({ history }) => {
   const [name, setName] = useState('');
@@ -19,7 +20,7 @@ const ProfilePage = ({ history }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState(null);
   const dispatch = useDispatch();
-
+  
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -46,6 +47,10 @@ const ProfilePage = ({ history }) => {
       }
     }
   }, [dispatch, history, userInfo, user, success]);
+  useEffect(() => {
+    dispatch(listProducts());
+  }, [dispatch]);
+
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -164,6 +169,13 @@ const ProfilePage = ({ history }) => {
                 </tr>
               ))}
             </tbody>
+            <br />
+            <LinkContainer to={`/allOrderes`}>
+            <Button  variant='primary'>
+              View All Orders
+            </Button>
+                    </LinkContainer>
+            
           </Table>
         )}
       </Col>

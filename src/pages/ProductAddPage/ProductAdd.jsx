@@ -68,7 +68,7 @@ const ProductAddPage = ({ match, history }) => {
           'Content-Type': 'multipart/form-data',
         },
       };
-      const { data } = await axios.post('/api/upload', formData, config);
+      const { data } = await axios.post('https://plantae-backend.herokuapp.com/api/upload', formData, config);
       setImage(data);
       setUploading(false);
     } catch (error) {
@@ -146,13 +146,13 @@ const ProductAddPage = ({ match, history }) => {
                 </Form.Group>
 
                 <Form.Group controlId='image'>
-                  <Form.Label>Image</Form.Label>
-                  <Form.Control
+                  <Form.Label>Image </Form.Label>
+                  {/* <Form.Control
                     type='text'
                     
                     placeholder='Enter Image URL'
                     onChange={(e) => setImage(e.target.value)}
-                  ></Form.Control>
+                  ></Form.Control> */}
                   <Form.File
                     id='image-file'
                     label='Choose File'
@@ -186,6 +186,7 @@ const ProductAddPage = ({ match, history }) => {
                         <Dropdown.Item eventKey="Flora">Flora</Dropdown.Item>
                         <Dropdown.Item eventKey="Fruits">Fruits</Dropdown.Item>
                         <Dropdown.Item eventKey="Herbs">Herbs</Dropdown.Item>
+                        <Dropdown.Item eventKey="Vines">Vines</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
                 </Form.Group>
