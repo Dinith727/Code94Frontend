@@ -1,75 +1,30 @@
 import React from 'react';
-import { Image , Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../redux/reducers/user/user.actions';
-import Logo from './logo.png';
 
 const Header = () => {
-  const dispatch = useDispatch();
-  const userLogin = useSelector((state) => state.userLogin);
 
-  const { userInfo } = userLogin;
-
-  const logoutHandler = () => {
-    dispatch(logout());
-  };
 
   return (
     <header>
-      <Navbar style={{backgroundColor :'#2E8B57'}} variant='dark' expand='lg' collapseOnSelect>
+      <Navbar  expand='lg' >
         <Container>
-          <LinkContainer to='/'>
-            <Navbar.Brand>
-              <Image
-            src={Logo}
-            style={{ border: 'none' , width:'150px', height:'auto'}}
-            alt='Sign In Logo'/>
-            </Navbar.Brand>
-
-          </LinkContainer>
-          <Navbar.Toggle aria-controls='basic-navbar-nav' />
+          
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ml-auto'>
-              <LinkContainer to='/cart'>
-                <Nav.Link href='/cart'>
-                  <i className='fas fa-shopping-cart'></i>Cart
-                </Nav.Link>
-              </LinkContainer>
-              {userInfo ? (
-                <NavDropdown title={userInfo.name} id='username'>
-                   
-                  <LinkContainer to='/profile'>
-                    <NavDropdown.Item>Profile</NavDropdown.Item>
-                  </LinkContainer>
-                  <NavDropdown.Item onClick={logoutHandler}>
-                    Log Out
-                  </NavDropdown.Item>
+                <NavDropdown title= 'Admin'>
+                  <NavDropdown.Item>Profile</NavDropdown.Item>
+                  <NavDropdown.Item>LogOut</NavDropdown.Item>
                 </NavDropdown>
-              ) : (
-                <LinkContainer to='/login'>
-                  <Nav.Link href='/login'>
-                    <i className='fas fa-user'></i>Sign In
-                  </Nav.Link>
-                </LinkContainer>
-              )}
-              {userInfo && userInfo.isAdmin && (
-                <NavDropdown title='Admin' id='adminmenu'>
-                  <LinkContainer to='/admin/userlist'>
-                    <NavDropdown.Item>Users</NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to='/admin/productlist'>
-                    <NavDropdown.Item>Products</NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to='/admin/orderlist'>
-                    <NavDropdown.Item>Orders</NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to='/adminprofile'>
-                    <NavDropdown.Item>Reviews</NavDropdown.Item>
-                  </LinkContainer>
-                </NavDropdown>
-              )}
+   
             </Nav>
+            <img
+            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+            class="rounded-circle"
+            height="35"
+            alt="Black and White Portrait of a Man"
+            loading="lazy"
+          />
           </Navbar.Collapse>
         </Container>
       </Navbar>

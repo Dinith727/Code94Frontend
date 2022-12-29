@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -42,12 +41,8 @@ const ProductsListPage = ({ history, match }) => {
 
   useEffect(() => {
     dispatch({ type: ProductActionTypes.PRODUCT_CREATE_RESET });
-    if (!userInfo.isAdmin) {
-      history.push('/');
-    }
-
     if (successCreate) {
-      history.push(`/admin/product/${createdProduct._id}/add`);
+      history.push(`/product/${createdProduct._id}/add`);
     } else {
       dispatch(listProducts('', pageNumber));
     }
@@ -113,12 +108,6 @@ const ProductsListPage = ({ history, match }) => {
             <i className='fas fa-plus'></i> Create Product
           </Button>
         </Col>
-        <Col className='text-right'>
-        <Link to='/admin/report'>
-          <Button className='my-3'>
-            View Reports
-          </Button></Link>
-        </Col>
       </Row>
       {loadingDelete && <Loader />}
       {errorDelete && (
@@ -137,24 +126,26 @@ const ProductsListPage = ({ history, match }) => {
           <Table>
             <thead>
               <tr>
-                <th>ID</th>
-                <th>NAME</th>
+                <th>SKU</th>
+                <th>IMAGE</th>
+                <th>PRODUCT NAME</th>
                 <th>PRICE</th>
-                <th>CATEGORY</th>
-                <th>Stock</th>
+                
                 <th></th>
               </tr>
             </thead>
             <tbody>
               {products.map((product) => (
                 <tr key={product._id}>
-                  <td>{product._id}</td>
+              
+                  <td>#CA25</td>
                   <td>{product.name}</td>
-                  <td>${product.price}</td>
+                  
                   <td>{product.category}</td>
-                  <td>{product.countInStock}</td>
+                  <td>${product.price}</td>
+                  
                   <td>
-                    <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                    <LinkContainer to={`/product/${product._id}/edit`}>
                       <Button variant='light' className='btn-sm'>
                         <i className='fas fa-edit'></i>
                       </Button>
