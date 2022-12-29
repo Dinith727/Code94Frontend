@@ -1,6 +1,6 @@
 {
   "name": "plantaef",
-  "proxy": "https://plantae-backend.herokuapp.com/",
+  "proxy": "http://localhost:5000",
   "version": "0.1.0",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
