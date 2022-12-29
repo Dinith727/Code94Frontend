@@ -4,7 +4,6 @@ import { Table, Button, Row, Col, Image } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import ErrorMessage from '../../components/errormessage/errormessage';
 import Loader from '../../components/loader/Loader';
-import Paginate from '../../components/Paginate/Paginate';
 import {
   listProducts,
   deleteProduct,
@@ -19,7 +18,7 @@ const ProductsListPage = ({ history, match }) => {
   const dispatch = useDispatch();
 
   const productsList = useSelector((state) => state.productList);
-  const { loading, error, products, page, pages } = productsList;
+  const { loading, error, products, } = productsList;
 
   const productDelete = useSelector((state) => state.productDelete);
   const {
@@ -56,13 +55,13 @@ const ProductsListPage = ({ history, match }) => {
 
   const deleteHandler = (id) => {
     Swal.fire({
-      title: 'Are you sure to delete this Product?',
-      text: "You won't be able to revert this!",
+      title: 'Are you sure?',
+      text: "You will not be able to undo this action if you proceed!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, Delete it!',
+      confirmButtonText: 'Delete',
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(deleteProduct(id));
@@ -135,7 +134,6 @@ const ProductsListPage = ({ history, match }) => {
                 <th>IMAGE</th>
                 <th>PRODUCT NAME</th>
                 <th>PRICE</th>
-                
                 <th></th>
               </tr>
             </thead>
@@ -143,10 +141,10 @@ const ProductsListPage = ({ history, match }) => {
               {products.map((product) => (
                 <tr key={product._id}>
               
-                  <td>#CA25</td>
+                  <td>{product.category}</td>
                   <td><Image style={{height:'45px'}} src={product.image} alt={product.name} fluid /></td>
                   
-                  <td>{product.category}</td>
+                  <td>{product.name}</td>
                   <td>${product.price}</td>
                   
                   <td>
@@ -173,7 +171,6 @@ const ProductsListPage = ({ history, match }) => {
               ))}
             </tbody>
           </Table>
-          <Paginate pages={pages} page={page} isAdmin={true} />
         </>
       )}
     </>

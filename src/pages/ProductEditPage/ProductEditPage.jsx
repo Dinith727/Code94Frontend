@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Image, Container, Form, Button, Row, Col } from 'react-bootstrap';
+import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import ErrorMessage from '../../components/errormessage/errormessage';
 import Loader from '../../components/loader/Loader';
@@ -9,7 +9,6 @@ import { productDetails } from '../../redux/reducers/productdetails/productdetai
 import { updateProduct } from '../../redux/reducers/product/product.actions';
 import ProductActionTypes from '../../redux/reducers/product/product.types';
 import Swal from 'sweetalert2';
-import Product from '../ProductEditPage/Product.jpg';
 
 const ProductEditPage = ({ match, history }) => {
   const productId = match.params.id;
@@ -102,7 +101,7 @@ const ProductEditPage = ({ match, history }) => {
 
   return (
     <>
-      <Link to='/' className='btn btn-primary my-3'>
+      <Link to='/' className='btn btn-primary my-3' style={{backgroundColor: '#001EB9', borderRadius: '10px'}}>
         Go Back
       </Link>
       <Container>
@@ -120,6 +119,16 @@ const ProductEditPage = ({ match, history }) => {
               <ErrorMessage variant='danger'>{error}</ErrorMessage>
             ) : (
               <Form onSubmit={submitHandler}>
+                <Form.Group controlId='category'>
+                  <Form.Label>SKU</Form.Label>
+                  <Form.Control
+                    type='text'
+                    value={category}
+                    placeholder='SKU'
+                    onChange={(e) => setCategory(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+
                 <Form.Group controlId='name'>
                   <Form.Label>Name</Form.Label>
                   <Form.Control
@@ -130,15 +139,7 @@ const ProductEditPage = ({ match, history }) => {
                   ></Form.Control>
                 </Form.Group>
 
-                <Form.Group controlId='price'>
-                  <Form.Label>Price</Form.Label>
-                  <Form.Control
-                    type='number'
-                    value={price}
-                    placeholder='Enter Price'
-                    onChange={(e) => setPrice(e.target.value)}
-                  ></Form.Control>
-                </Form.Group>
+              
 
                 <Form.Group controlId='image'>
                   <Form.Label>Image</Form.Label>
@@ -157,33 +158,13 @@ const ProductEditPage = ({ match, history }) => {
                   {uploading && <Loader />}
                 </Form.Group>
 
-                <Form.Group controlId='brand'>
-                  <Form.Label>Brand</Form.Label>
-                  <Form.Control
-                    type='text'
-                    value={brand}
-                    placeholder='Enter Brand'
-                    onChange={(e) => setBrand(e.target.value)}
-                  ></Form.Control>
-                </Form.Group>
-
                 <Form.Group controlId='countInStock'>
-                  <Form.Label>CountInStock</Form.Label>
+                  <Form.Label>QTY</Form.Label>
                   <Form.Control
                     type='number'
                     value={countInStock}
-                    placeholder='Enter Count In Stock'
+                    placeholder='QTY'
                     onChange={(e) => setCountInStock(e.target.value)}
-                  ></Form.Control>
-                </Form.Group>
-
-                <Form.Group controlId='category'>
-                  <Form.Label>Category</Form.Label>
-                  <Form.Control
-                    type='text'
-                    value={category}
-                    placeholder='Enter Category '
-                    onChange={(e) => setCategory(e.target.value)}
                   ></Form.Control>
                 </Form.Group>
 
@@ -197,19 +178,11 @@ const ProductEditPage = ({ match, history }) => {
                   ></Form.Control>
                 </Form.Group>
 
-                <Button type='submit' variant='primary'>
+                <Button type='submit' className='btn btn-primary my-3' style={{backgroundColor: '#001EB9', borderRadius: '10px'}}>
                   Update
                 </Button>
               </Form>
             )}
-          </Col>
-          <Col md={6}>
-            <Image
-              src={Product}
-              alt='Product Logo'
-              fluid
-              style={{ border: 'none' , paddingTop : '200px'}}
-            ></Image>
           </Col>
         </Row>
       </Container>

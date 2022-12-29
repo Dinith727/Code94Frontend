@@ -12,9 +12,9 @@ const Meta = ({ title, description, keywords }) => {
 };
 
 Meta.defaultProps = {
-  title: 'Welcome To Plantae e-plant Store',
-  description: 'We sell Best Indoor & Outdooe plants',
-  keywords: 'Floral Plants, Indoor Plants ,Outdoor Plants',
+  title: 'Welcome To e-Store',
+  description: 'We sell Best Items',
+  keywords: 'Floral, Tech ,Plants',
 };
 
 export default Meta;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Image, Container, Form, Button, Row, Col } from 'react-bootstrap';
+import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import ErrorMessage from '../../components/errormessage/errormessage';
 import Loader from '../../components/loader/Loader';
@@ -9,14 +9,13 @@ import { productDetails } from '../../redux/reducers/productdetails/productdetai
 import { updateProduct } from '../../redux/reducers/product/product.actions';
 import ProductActionTypes from '../../redux/reducers/product/product.types';
 import Swal from 'sweetalert2';
-import Product from '../ProductAddPage/Product1.png';
-import Dropdown from 'react-bootstrap/Dropdown';
+
 
 const ProductAddPage = ({ match, history }) => {
   const productId = match.params.id;
 
   const [name, setName] = useState('');
-  const [price, setPrice] = useState(0);
+  const price = 24;
   const [image, setImage] = useState('');
   const [brand, setBrand] = useState('');
   const [category, setCategory] = useState('');
@@ -46,7 +45,7 @@ const ProductAddPage = ({ match, history }) => {
         showConfirmButton: false,
         timer: 1000,
       });
-      history.push('/admin/productlist');
+      history.push('/');
     } else {
       if (!product.name || product._id !== productId) {
         dispatch(productDetails(productId));
@@ -100,14 +99,10 @@ const ProductAddPage = ({ match, history }) => {
     );
   };
 
-  const handleSelect=(e)=>{
-    console.log(e);
-    setCategory(e)
-  }
 
   return (
     <>
-      <Link to='/admin/productlist' className='btn btn-primary my-3'>
+      <Link to='/' className='btn btn-primary my-3' style={{backgroundColor: '#001EB9', borderRadius: '10px'}}>
         Go Back
       </Link>
       <Container>
@@ -125,6 +120,16 @@ const ProductAddPage = ({ match, history }) => {
               <ErrorMessage variant='danger'>{error}</ErrorMessage>
             ) : (
               <Form onSubmit={submitHandler}>
+                <Form.Group controlId='countInStock'>
+                  <Form.Label>SKU</Form.Label>
+                  <Form.Control
+             
+                    
+                    placeholder='SKU'
+                    onChange={(e) => setCategory(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+
                 <Form.Group controlId='name'>
                   <Form.Label>Name</Form.Label>
                   <Form.Control
@@ -135,15 +140,7 @@ const ProductAddPage = ({ match, history }) => {
                   ></Form.Control>
                 </Form.Group>
 
-                <Form.Group controlId='price'>
-                  <Form.Label>Price</Form.Label>
-                  <Form.Control
-                    type='number'
-                    
-                    placeholder='Enter Price'
-                    onChange={(e) => setPrice(e.target.value)}
-                  ></Form.Control>
-                </Form.Group>
+               
 
                 <Form.Group controlId='image'>
                   <Form.Label>Image </Form.Label>
@@ -158,37 +155,19 @@ const ProductAddPage = ({ match, history }) => {
                     label='Choose File'
                     custom
                     onChange={uploadFileHandler}
+                    formNoValidate
                   ></Form.File>
                   {uploading && <Loader />}
                 </Form.Group>
 
                 <Form.Group controlId='countInStock'>
-                  <Form.Label>CountInStock</Form.Label>
+                  <Form.Label>QTY</Form.Label>
                   <Form.Control
                     type='number'
                     
                     placeholder='Enter Count In Stock'
                     onChange={(e) => setCountInStock(e.target.value)}
                   ></Form.Control>
-                </Form.Group>
-
-                <Form.Group controlId='category'>
-                  <Form.Label>Category</Form.Label>      
-                  <Dropdown 
-                  onSelect={handleSelect}
-                    >
-                    <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                    Category
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <Dropdown.Item eventKey="Cactus">Cactus</Dropdown.Item>
-                        <Dropdown.Item eventKey="Ferns">Ferns</Dropdown.Item>
-                        <Dropdown.Item eventKey="Flora">Flora</Dropdown.Item>
-                        <Dropdown.Item eventKey="Fruits">Fruits</Dropdown.Item>
-                        <Dropdown.Item eventKey="Herbs">Herbs</Dropdown.Item>
-                        <Dropdown.Item eventKey="Vines">Vines</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
                 </Form.Group>
 
                 
@@ -203,19 +182,11 @@ const ProductAddPage = ({ match, history }) => {
                   ></Form.Control>
                 </Form.Group>
 
-                <Button type='submit' variant='primary'>
+                <Button type='submit'  style={{backgroundColor: '#001EB9', borderRadius: '10px'}}>
                   Add
                 </Button>
               </Form>
             )}
-          </Col>
-          <Col md={6}>
-            <Image
-              src={Product}
-              alt='Product Logo'
-              fluid
-              style={{ border: 'none'}}
-            ></Image>
           </Col>
         </Row>
       </Container>
