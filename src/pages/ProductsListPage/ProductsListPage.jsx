@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Table, Button, Row, Col } from 'react-bootstrap';
+import { Table, Button, Row, Col, Image } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import ErrorMessage from '../../components/errormessage/errormessage';
 import Loader from '../../components/loader/Loader';
@@ -36,8 +36,7 @@ const ProductsListPage = ({ history, match }) => {
     product: createdProduct,
   } = productCreate;
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+
 
   useEffect(() => {
     dispatch({ type: ProductActionTypes.PRODUCT_CREATE_RESET });
@@ -50,7 +49,6 @@ const ProductsListPage = ({ history, match }) => {
     dispatch,
     history,
     pageNumber,
-    userInfo,
     successDelete,
     successCreate,
     createdProduct,
@@ -111,8 +109,8 @@ const ProductsListPage = ({ history, match }) => {
           <Button style={{backgroundColor: '#001EB9', borderRadius: '10px'}} className='my-3 mr-3' onClick={createProductHandler}>
            New Product
           </Button>
-          <Button style={{backgroundColor: '#FFFFFF', color: '#001EB9', borderRadius: '10px'}} className='my-3' onClick={createProductHandler}>
-            <i className='fas fa-star'></i>
+          <Button style={{backgroundColor: '#FFFFFF', color: '#001EB9', borderRadius: '10px', border: '2px solid #001EB9'}} onClick={createProductHandler}>
+            <i className='fas fa-star fa-xl'></i>
           </Button>
         </Col>
       </Row>
@@ -146,24 +144,30 @@ const ProductsListPage = ({ history, match }) => {
                 <tr key={product._id}>
               
                   <td>#CA25</td>
-                  <td>{product.name}</td>
+                  <td><Image style={{height:'45px'}} src={product.image} alt={product.name} fluid /></td>
                   
                   <td>{product.category}</td>
                   <td>${product.price}</td>
                   
                   <td>
-                    <LinkContainer to={`/product/${product._id}/edit`}>
-                      <Button variant='light' className='btn-sm'>
-                        <i className='fas fa-edit'></i>
-                      </Button>
-                    </LinkContainer>
-                    <Button
+                  <Button
                       variant='light'
                       className='btn-sm'
                       onClick={() => deleteHandler(product._id)}
                     >
-                      <i className='fas fa-trash' style={{color:"red"}}></i>
+                      <i className='fas fa-trash' style={{color:"#001EB9"}}></i>
                     </Button>
+                    <LinkContainer to={`/product/${product._id}/edit`} style={{color:"#001EB9"}}>
+                      <Button variant='light' className='btn-sm'>
+                        <i className='fas fa-pen'></i>
+                      </Button>
+                    </LinkContainer>
+                    
+                    <LinkContainer to={`/product/${product._id}/edit`}  style={{ color: '#001EB9'}}>
+                      <Button variant='light' className='btn-sm'>
+                        <i className='fas fa-star'></i>
+                      </Button>
+                    </LinkContainer>
                   </td>
                 </tr>
               ))}

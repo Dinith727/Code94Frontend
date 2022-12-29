@@ -45,7 +45,7 @@ const ProductEditPage = ({ match, history }) => {
         showConfirmButton: false,
         timer: 1000,
       });
-      history.push('/admin/productlist');
+      history.push('/');
     } else {
       if (!product.name || product._id !== productId) {
         dispatch(productDetails(productId));
@@ -68,12 +68,7 @@ const ProductEditPage = ({ match, history }) => {
     setUploading(true);
 
     try {
-      const config = {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      };
-      const { data } = await axios.post('https://plantae-backend.herokuapp.com/api/upload', formData, config);
+      const { data } = await axios.post('/api/upload', formData);
       setImage(data);
       setUploading(false);
     } catch (error) {
@@ -107,7 +102,7 @@ const ProductEditPage = ({ match, history }) => {
 
   return (
     <>
-      <Link to='/admin/productlist' className='btn btn-primary my-3'>
+      <Link to='/' className='btn btn-primary my-3'>
         Go Back
       </Link>
       <Container>
