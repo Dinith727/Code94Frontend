@@ -113,7 +113,7 @@ const ProductsListPage = ({ history, match }) => {
           <Button style={{ backgroundColor: '#001EB9', borderRadius: '10px' }} className='my-3 mr-3' onClick={createProductHandler}>
             New Product
           </Button>
-          <Button style={{ backgroundColor: '#FFFFFF', color: '#001EB9', borderRadius: '10px', border: '2px solid #001EB9' }} onClick={createProductHandler}>
+          <Button style={{ backgroundColor: '#FFFFFF', color: '#001EB9', borderRadius: '10px', border: '2px solid #001EB9' }} >
             <i className='fas fa-star fa-xl'></i>
           </Button>
         </Col>
@@ -134,7 +134,7 @@ const ProductsListPage = ({ history, match }) => {
         <>
           <Table>
             <thead>
-              <tr>
+              <tr style={{ color: "#001EB9"}}>
                 <th>SKU</th>
                 <th>IMAGE</th>
                 <th>PRODUCT NAME</th>
@@ -165,12 +165,9 @@ const ProductsListPage = ({ history, match }) => {
                         <i className='fas fa-pen'></i>
                       </Button>
                     </LinkContainer>
-                    
-                    <LinkContainer to={`/product/${product._id}/edit`}  style={{ color: '#001EB9'}}>
-                      <Button variant='light' className='btn-sm'>
+                      <Button variant='light' className='btn-sm' style={{ color: "#001EB9" }}>
                         <i className='fas fa-star'></i>
                       </Button>
-                    </LinkContainer>
                   </td>
                 </tr>
               ))}
