@@ -101,13 +101,23 @@ const ProductEditPage = ({ match, history }) => {
 
   return (
     <>
-      <Link to='/' className='btn btn-primary my-3' style={{backgroundColor: '#001EB9', borderRadius: '10px'}}>
-        Go Back
-      </Link>
       <Container>
         <Row className='justify-content-md-center'>
-          <Col xs={12} md={6}>
-            <h1>Edit Product</h1>
+          <Col xs={12} md={16}>
+          <Row>
+              <Col xs={3}>
+                <a href='/' style={{textDecoration: 'none'}}>
+                <h1>Products</h1>
+                </a>
+                
+              </Col>
+              <Col xs={1}>
+                <i style={{ color: '#001EB9', paddingTop: '17px' }} className="fas fa-chevron-right fa-2x"></i>
+              </Col>
+              <Col xs={7}>
+                <h3 style={{ color: '#001EB9' }}>Edit Product</h3>
+              </Col>
+            </Row>
             {loadingUpdate && <Loader />}
             {errorUpdate && (
               <ErrorMessage variant='danger'>{errorUpdate}</ErrorMessage>
@@ -179,8 +189,11 @@ const ProductEditPage = ({ match, history }) => {
                 </Form.Group>
 
                 <Button type='submit' className='btn btn-primary my-3' style={{backgroundColor: '#001EB9', borderRadius: '10px'}}>
-                  Update
+                  Save
                 </Button>
+                <Link to='/' className='btn btn-primary my-3' style={{ backgroundColor: '#001EB9', borderRadius: '10px', float:'right' }}>
+                  Go Back
+                </Link>
               </Form>
             )}
           </Col>

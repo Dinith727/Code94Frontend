@@ -102,13 +102,23 @@ const ProductAddPage = ({ match, history }) => {
 
   return (
     <>
-      <Link to='/' className='btn btn-primary my-3' style={{backgroundColor: '#001EB9', borderRadius: '10px'}}>
-        Go Back
-      </Link>
       <Container>
         <Row className='justify-content-md-center'>
-          <Col xs={12} md={6}>
-            <h1>Add Product</h1>
+          <Col xs={12} md={16}>
+            <Row>
+              <Col xs={3}>
+                <a href='/' style={{textDecoration: 'none'}}>
+                <h1>Products</h1>
+                </a>
+                
+              </Col>
+              <Col xs={1}>
+                <i style={{ color: '#001EB9', paddingTop: '17px' }} className="fas fa-chevron-right fa-2x"></i>
+              </Col>
+              <Col xs={7}>
+                <h3 style={{ color: '#001EB9' }}>Add New Product</h3>
+              </Col>
+            </Row>
             {loadingUpdate && <Loader />}
             {errorUpdate && (
               <ErrorMessage variant='danger'>{errorUpdate}</ErrorMessage>
@@ -123,8 +133,8 @@ const ProductAddPage = ({ match, history }) => {
                 <Form.Group controlId='countInStock'>
                   <Form.Label>SKU</Form.Label>
                   <Form.Control
-             
-                    
+
+
                     placeholder='SKU'
                     onChange={(e) => setCategory(e.target.value)}
                   ></Form.Control>
@@ -134,13 +144,13 @@ const ProductAddPage = ({ match, history }) => {
                   <Form.Label>Name</Form.Label>
                   <Form.Control
                     type='name'
-                    
+
                     placeholder='Enter Your Name'
                     onChange={(e) => setName(e.target.value)}
                   ></Form.Control>
                 </Form.Group>
 
-               
+
 
                 <Form.Group controlId='image'>
                   <Form.Label>Image </Form.Label>
@@ -164,27 +174,27 @@ const ProductAddPage = ({ match, history }) => {
                   <Form.Label>QTY</Form.Label>
                   <Form.Control
                     type='number'
-                    
+
                     placeholder='Enter Count In Stock'
                     onChange={(e) => setCountInStock(e.target.value)}
                   ></Form.Control>
                 </Form.Group>
-
-                
-
                 <Form.Group controlId='description'>
                   <Form.Label>Description</Form.Label>
                   <Form.Control
                     type='text'
-                    
+
                     placeholder='Enter Description '
                     onChange={(e) => setDescription(e.target.value)}
                   ></Form.Control>
                 </Form.Group>
 
-                <Button type='submit'  style={{backgroundColor: '#001EB9', borderRadius: '10px'}}>
-                  Add
+                <Button className='btn btn-primary my-3' type='submit' style={{ backgroundColor: '#001EB9', borderRadius: '10px' }}>
+                  Add Product
                 </Button>
+                <Link to='/' className='btn btn-primary my-3' style={{ backgroundColor: '#001EB9', borderRadius: '10px',  float:'right' }}>
+                  Go Back
+                </Link>
               </Form>
             )}
           </Col>

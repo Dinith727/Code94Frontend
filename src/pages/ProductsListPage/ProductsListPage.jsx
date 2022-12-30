@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Table, Button, Row, Col, Image } from 'react-bootstrap';
+import { Table, Button, Row, Col, Image, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import ErrorMessage from '../../components/errormessage/errormessage';
 import Loader from '../../components/loader/Loader';
@@ -77,43 +77,43 @@ const ProductsListPage = ({ history, match }) => {
 
   const [searchWord,setSearchWord] = useState("");
   const handleFilter = (event)=>{
-   
+
     const searchPlant = event.target.value;
     console.log(searchPlant);
     setSearchWord(searchPlant);
- 
-    if (searchPlant === ''){
+
+    if (searchPlant === '') {
       console.log("Empty")
-      dispatch(listProducts('',pageNumber))
-    }else {
-      dispatch(listProducts(searchWord,pageNumber))
+      dispatch(listProducts('', pageNumber))
+    } else {
+      dispatch(listProducts(searchWord, pageNumber))
     }
 
 
   }
   return (
     <>
-      <Row className='align-items-center'>
-        <Col>
+    <Container>
+      <Row md={10}>
+        <Col xs={3}>
           <h1>Products</h1>
         </Col>
-       
       </Row>
+      </Container>
       <Row className='align-items-center'>
-      
         <Col>
-         <input style={{ borderRadius: '30px'}} className='form-control' type='search' placeholder='Search' name='searchPlant' onChange={handleFilter}></input>
+          <input style={{ borderRadius: '30px' }} className='form-control' type='search' placeholder='Search' name='searchPlant' onChange={handleFilter}></input>
         </Col>
         <Col>
-         <Button style={{backgroundColor: '#001EB9', borderRadius: '30px'}} >
-         <i className='fas fa-search fa-xl'></i> Search
+          <Button style={{ backgroundColor: '#001EB9', borderRadius: '30px' }} >
+            <i className='fas fa-search fa-xl'></i> Search
           </Button>
         </Col>
         <Col className='text-right'>
-          <Button style={{backgroundColor: '#001EB9', borderRadius: '10px'}} className='my-3 mr-3' onClick={createProductHandler}>
-           New Product
+          <Button style={{ backgroundColor: '#001EB9', borderRadius: '10px' }} className='my-3 mr-3' onClick={createProductHandler}>
+            New Product
           </Button>
-          <Button style={{backgroundColor: '#FFFFFF', color: '#001EB9', borderRadius: '10px', border: '2px solid #001EB9'}} onClick={createProductHandler}>
+          <Button style={{ backgroundColor: '#FFFFFF', color: '#001EB9', borderRadius: '10px', border: '2px solid #001EB9' }} onClick={createProductHandler}>
             <i className='fas fa-star fa-xl'></i>
           </Button>
         </Col>
@@ -145,22 +145,22 @@ const ProductsListPage = ({ history, match }) => {
             <tbody>
               {products.map((product) => (
                 <tr key={product._id}>
-              
+
                   <td>{product.category}</td>
-                  <td><Image style={{height:'45px'}} src={product.image} alt={product.name} fluid /></td>
-                  
+                  <td><Image style={{ height: '45px' }} src={product.image} alt={product.name} fluid /></td>
+
                   <td>{product.name}</td>
                   <td>${product.price}</td>
-                  
+
                   <td>
-                  <Button
+                    <Button
                       variant='light'
                       className='btn-sm'
                       onClick={() => deleteHandler(product._id)}
                     >
-                      <i className='fas fa-trash' style={{color:"#001EB9"}}></i>
+                      <i className='fas fa-trash' style={{ color: "#001EB9" }}></i>
                     </Button>
-                    <LinkContainer to={`/product/${product._id}/edit`} style={{color:"#001EB9"}}>
+                    <LinkContainer to={`/product/${product._id}/edit`} style={{ color: "#001EB9" }}>
                       <Button variant='light' className='btn-sm'>
                         <i className='fas fa-pen'></i>
                       </Button>
